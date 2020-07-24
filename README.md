@@ -10,8 +10,7 @@ Here are some of the motivations why we have created this chatbot, QSocial :
 1. A drive to learn new things. As student Developers, it's in our nature to learn a new programming language, platform, etc.
 2. Self-satisfaction. It's a great feeling to achieve something.
 3. A drive to create something useful for other people.
-4. Career advancement. The skills and knowledge We can gain will be useful for our future careers
-
+4. Career advancement. The skills and knowledge We can gain will be useful for our future careers.
 5.Perseverance. Having that drive to complete our masterpiece.
 
 
