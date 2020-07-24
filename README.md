@@ -1,4 +1,4 @@
-# Your Chatbot's Name
+# QSocial
 
 [//]: <> (Please use this Winning Hackathon Application as an example:
 https://devpost.com/software/rewise-ai-powered-revision-bot)
@@ -10,44 +10,49 @@ Add your Team’s Inspiration for the Chatbot
 
 
 ## What it does
-Add a short description
+This is a conversational agent that helps with problems on many popular social platforms (eg. Instagram, Facebook, Twitter). At QSocial We help our customers with an efficient reporting option compiled with the step by step safety and security forms.
 
 
 ## List your Chatbot’s features and use cases
-1. 1
-1. 2
-
+1. Quick reporting of account impersonation, theft or fraud without unnecessary waiting.
+2. Recovering a deleted account by mistake without filling out forms (The chatbot will already have access your personal information because it was already inputted by the user during sign-up).
+3. Easier and more efficient access to social media platform’s simple to complete forms. (All report forms will be complied together in one place. All you have to do is ask the chat bot for the report form and you have the option of filling it out yourself or automatically by the chatbot.)
 
 ## How we built it
 Tech Stack & Documentation:
-* 1
-* 2
+* Node js
+* express js
+* heroku (hosted webhook)
 
 
 ## Challenges we ran into
-1. Challenge 1
-1. Challenge 2
+1. Creating the webhook
+2. Verifying the webhook
+3. Getting the webhook to function effectively
+4. Getting coded responses to function effectively
  
  
 ## Accomplishments that we're proud of
-* Accomplishment 1
-* Accomplishment 2
+* Fixing the webhooks
+* Getting the functionality to work properly
 
 
 ## What we learned
-* Learning 1
-* Learning 2
+* Creating webhooks
+* Creating facebook apps
+* How to use heroku and heroku cli
 
 
-## What's next for “Insert Your Bot Name”
+## What's next for “QSocial”
 Product Roadmap - next features for example
-1. Feature 1
-1. Feature 2
+1. Adding quick replies
+1. Integrting QSocial with wit.ai NLP
 
 
 ## Built With - provide the tech stack used 
-* example1
-* example2
+* Node js
+* express js
+* heroku (hosted webhook)
 
 
 ## Try it out
