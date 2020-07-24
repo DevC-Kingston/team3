@@ -6,7 +6,7 @@ https://devpost.com/software/rewise-ai-powered-revision-bot)
 **Team Members**: Our team members are Alexia Grant, Alluta Peters, Thorn Lewars, Javian Campbell, Jhordaine Gordon
 
 ## Inspiration
-Most of our group members have been a victim of a fake social media page and have had issues finding the correct forms or having the pages removed in a timely manner. 
+Most of our group members have been a victims of  fake social media pages and have had issues finding the correct forms or having the pages removed in a timely manner. 
 We were excited to build a chatbot that would make the process of reporting issues on social media pages a lot easier. 
 
 
