@@ -19,17 +19,19 @@ app.get('/', function(req, res) {
 })
 
 
-let app_token = "EAAEkXLChDsMBAHE6xd2tt86DYcU9t9AVY1JHXfpmZCXn6ZCzmMS06ju4TS6tHBZAIU8jPOqat44DZAZBh8LQSZA0IHBt8p4Yi1AFpeuQFpqG381ZAkSHjccVedAiSHL0TUIMb2cUCkMiLDx4HY0KaL6fYwIhZC4fL8wDd8CSdxICC3TeZBgwAO8Ys"
+//let app_token = "EAAEkXLChDsMBAHE6xd2tt86DYcU9t9AVY1JHXfpmZCXn6ZCzmMS06ju4TS6tHBZAIU8jPOqat44DZAZBh8LQSZA0IHBt8p4Yi1AFpeuQFpqG381ZAkSHjccVedAiSHL0TUIMb2cUCkMiLDx4HY0KaL6fYwIhZC4fL8wDd8CSdxICC3TeZBgwAO8Ys"
 
-let barnaby_token = "EAAEU5gpE1W0BAFtP2XpK548KUPm5pRDFreDemZALZAuuOUa6DW9O6oQZBkpRaZBnLZAyGI0ob2HJWtZBTjtO81gDOLM7ZCURoGLE5w11SOe8hy6wCN3v6uNxBnUKRedXTZBBDi7e68GnbE3zCYKvqIA2e33lLR2aZCqXWZBUhTM9wRQ1cWzM1DCtQQ"
+//let barnaby_token = "EAAEU5gpE1W0BAFtP2XpK548KUPm5pRDFreDemZALZAuuOUa6DW9O6oQZBkpRaZBnLZAyGI0ob2HJWtZBTjtO81gDOLM7ZCURoGLE5w11SOe8hy6wCN3v6uNxBnUKRedXTZBBDi7e68GnbE3zCYKvqIA2e33lLR2aZCqXWZBUhTM9wRQ1cWzM1DCtQQ"
 
-let q_token = "EAAEkXLChDsMBALBeKlqiSskg9HMkEbRYQpN7dtwp2ZA6uLDcdtRqbUlfHRzzgspmH8bJ5FUPPwKLDvvt6Cea0jUp8tAIZC7Ej9Tst4v7fjOMFeRcAeiqY3APybwjPY7IgIKtc1hxmv2FwZClfDdK7W2H8qsxToAbZBy3yTcUGv6hzk03KuoE"
+let q_token = "EAAEkXLChDsMBAHPeqbxE2SZAZA8CZCJxsAd78TJhPEhkgmtiADSO7ids8wJmRjSJZA0MtLBWKo2QwHAifmXUL5AQ55UYdL9QKnHWJiWEDRxhPaz3iiOa8C4u2oBRSHYp6K17W0d83DjqvieQGTJYcmmAnMZCuRrkd8d6yyt08ZBatJwQt6KH93"
 
-let greetings = ["Hi", "hi", "HI", "hello", "Hello", "HELLO", "How are you", "What's up", "sup", "Sup", "SUP"];
+let greetings = ["Hi", "HI", "hi", "Hello", "HELLO", "hello", "Hi How are you", "What's up", "Sup", "SUP", "sup"];
 
-let greeting_response = ["Hi I'm Barnaby, How can I assist?", "Hello, how may help you today?", "Hi there. How may I help you today?"]
+let greeting_response = ["Hi I'm Barnaby, How can I assist?", "Hello, how may I help you today?", "Hi there. How may I help you today?"]
 
-let q_reporting = ["I would like to report account missuse","I would like to report account theft",	"I would like to report account fraud"]
+let q_reporting = ["Report account missuse","Report account theft",	"Report account fraud"]
+
+let q_report = ["Report account missuse","Report account theft","Report account fraud","report account missuse","report account theft","report account fraud", "REPORT ACCOUNT MISSUSE", "REPORT ACCOUNT FRAUD", "REPORT ACCOUNT THEFT"]
 
 
 let q_platforms = [
@@ -87,31 +89,50 @@ app.post('/webhook/', function(req, res){
 		let event = messaging_events[i]
 		let sender = event.sender.id
 
-		if(event.message && event.message.text){
+		if(event.message && event.message.text) {
 			let text = event.message.text
-			//sendText(sender, "Your message: " + text.substring(0, 100))
-			//sendText(sender, "send text: "+text.substring(0, 100))
-			//messageHandler(sender, "handler: " + text.substring(0, 100))
 			
-			for (var l of greetings){
-				if(text.includes(l)) {
-					let num = Math.floor(Math.random() * greeting_response.length); 
-					let msg = greeting_response[num];
-					messageHandler(sender, msg);
+			for (var l of greetings) {
+				
+				if(text.includes(l)) { //if the message text conatins a gretting, respond with a greeting from the greeting_response array 
+					let num = Math.floor(Math.random() * greeting_response.length); //generates a random number from 0 - max of greeting_response array
+					let msg = greeting_response[num]; //sets a random response from the greeting_response array to the message variable 
+															
+					sendText(sender, msg); //sends the response to the recipient
+
+					let q_rep = ""
+					for(var x of q_reporting) {
+						if(q_rep === "" || q_rep.length === 0 || q_rep === null){
+							q_rep = q_rep.concat(x) //adds an initial complaint type to the empty string
+						}else{
+							q_rep = q_rep.concat(" | " + x) //adds the remaining complaint types
+						}
+					}
+					sendText(sender, q_rep); //displays the various types of complaints to the user
 
 				}
 			}
 
 
-			for(var r of q_reporting){
+			for(var r of q_report){
 
-				if(text.includes(r)) { 
-					let a_rep = "Okay, I can help you with that";
-					messageHandler(sender, a_rep);
+				if(text.includes(r)) { //if the message text conatins a complaint type, add each platform name to the plats variable 
+					let a_rep = "Okay, I can help you with that.";
+					sendText(sender, a_rep);
 
-					let sec = "On which social media platfrom do you have this issue?";
-					sendText(sender, sec);
-					
+					a_rep = "On which social media platfrom do you have this issue?";
+					sendText(sender, a_rep);
+
+					let plats = ""
+					for(var x of r_platforms) {
+						if(plats === "" || plats.length === 0 || plats === null){
+							plats = plats.concat(x)
+						}else{
+							plats = plats.concat(" | " + x)
+						}
+					}
+
+					sendText(sender, plats); //display the various platforms to the user
 
 				}
 
@@ -121,10 +142,10 @@ app.post('/webhook/', function(req, res){
 			for (var p of q_platforms){
 
 				if(text.includes(p)) { 
-					let msg = "Okay";
-					messageHandler(sender, msg);
+					let msg = "Okay.";
+					sendText(sender, msg);
 
-					msg = "Could you confirm the user name of the account";
+					msg = "Could you confirm the user name of the account.";
 					sendText(sender, msg);
 
 				}
@@ -134,8 +155,11 @@ app.post('/webhook/', function(req, res){
 
 			if(text.includes("@")) {
 
-				let msg = "Okay, please complete the Consent Note Verification and Document Verification form";
-				messageHandler(sender, msg);
+				let msg = "Okay, we will submit the request on your behalf";
+				sendText(sender, msg);
+
+				msg = "Please complete the Consent Note Verification Form and Document Verification form";
+				sendText(sender, msg);
 
 				msg = "Here's the link: www.tiktokreportmaintain.com";
 				sendText(sender, msg);
@@ -144,19 +168,6 @@ app.post('/webhook/', function(req, res){
 
 
 		}
-
-		/*
-		if(event.message && event.message.text){
-			let text = event.message.text
-			
-		}
-		else
-		
-
-		if (event.postback) {
-			postbackHandler(sender, event.postback)
-		}
-		*/
 
 	}
 
@@ -188,24 +199,10 @@ function sendText(sender, text){
 
 
 
-
+/*
 function messageHandler(sender, text){
-	let luta;
-	let handlerData = {text: text}
-
 	
-	/*
-	for (var i = 0; i < greetings.length; i++) {
-		if (msg === "Hi" || msg === "Hello") {
-			msg_response = greeting_response[i];
-		}
-		if (text.includes("Hi") || text.includes("Hello")) {
-				
-			}
-	}
-	*/
-
-	//luta = greeting_response[1]
+	let handlerData = {text: text}
 
 	request({
 		url: "https://graph.facebook.com/v2.6/me/messages",
@@ -226,7 +223,7 @@ function messageHandler(sender, text){
 
 	
 }
-
+*/
 
 
 
